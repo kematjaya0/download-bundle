@@ -1,0 +1,27 @@
+{% use "bootstrap_3_layout.html.twig" %}
+
+{% block file_widget %}
+
+    {% if form.vars.data %}
+        {% set data = form.parent.vars.data %}
+        {% if data.id is defined %}
+            {% set enc = get_class(data)|encryp %}
+            <p>
+                {% if form.vars.data is images %}
+                    <img src="{{ path('file_download', {q: data.id|encryp, name: form.vars.name|encryp, type: get_class(data)|encryp}) }}" style="max-width: 100px; max-height: 70px"/> <br/>
+                {% endif %}
+                <a href="{{ path('file_download', {q: data.id|encryp, name: form.vars.name|encryp, type: get_class(data)|encryp}) }}">{{ form.vars.data }}</a>
+            </p>
+        {% else %}
+            <p>
+                {% if form.vars.data is images %}
+                    <img src="{{ path('direct_download', {filepath: form.vars.data|encryp}) }}" style="max-width: 100px; max-height: 70px"/> <br/>
+                {% endif %}
+                <a href="{{ path('direct_download', {filepath: form.vars.data|encryp}) }}">{{ 'download'|trans }}</a>
+            </p>
+        {% endif %}
+    {% endif %}
+    
+    {{- block('form_widget_simple') -}}
+    
+{% endblock %}

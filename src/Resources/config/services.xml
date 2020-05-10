@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" />
+        <!--<service id="Kematjaya\SerialNumber\Lib\SerialNumber" class="Kematjaya\SerialNumber\Lib\SerialNumber"/>
+        <service id="Kematjaya\SerialNumberBundle\Repository\ParameterRepoInterface" class="Kematjaya\SerialNumberBundle\Repository\ParameterRepoInterface"/>
+        <service id="Symfony\Component\Security\Core\Encoder\NativePasswordEncoder" class="Symfony\Component\Security\Core\Encoder\NativePasswordEncoder"/>
+        
+        <service id="kmj.serial_number" alias="Kematjaya\SerialNumber\Lib\SerialNumber" public="true"/>
+        <service id="kmj.setting" alias="Kematjaya\SerialNumberBundle\Entity\Setting" public="true"/>
+        <service id="kmj.parameter_repo" alias="Kematjaya\SerialNumberBundle\Repository\ParameterRepoInterface" public="true"/>
+        <service id="kmj.native_password_encoder.generic" alias="Symfony\Component\Security\Core\Encoder\NativePasswordEncoder" public="true"/>
+        
+        <service id="Kematjaya\SerialNumberBundle\Builder\SerialNumberBuilder" class="Kematjaya\SerialNumberBundle\Builder\SerialNumberBuilder">
+            <argument type="service" id="kmj.native_password_encoder.generic" />
+            <argument type="service" id="kmj.serial_number" />
+            <argument type="service" id="kmj.setting" />
+            <argument type="service" id="session" />
+        </service>
+        <service id="kmj.serial_number_builder" alias="Kematjaya\SerialNumberBundle\Builder\SerialNumberBuilder" public="true"/>
+        
+        <service id="Kematjaya\SerialNumberBundle\Console\SerialNumberConsole" class="Kematjaya\SerialNumberBundle\Console\SerialNumberConsole">
+            <argument type="service" id="kmj.serial_number_builder" />
+            <tag name="console.command"/>
+        </service>
+        <service id="kmj.serial_number_console" alias="Kematjaya\SerialNumberBundle\Console\SerialNumberConsole" public="true"/>
+        
+        <service id="Kematjaya\SerialNumberBundle\EventListener\SerialNumberEventListener" class="Kematjaya\SerialNumberBundle\EventListener\SerialNumberEventListener">
+            <argument type="service" id="kmj.serial_number_builder" />
+            <argument type="service" id="router.default" />
+            <tag name="kernel.event_listener" event="kernel.request"/>
+        </service>
+        <service id="kmj.serial_number_event_listener" alias="Kematjaya\SerialNumberBundle\EventListener\SerialNumberEventListener" public="true"/>
+        
+        <service id="Kematjaya\SerialNumberBundle\Controller\SerialNumberController" class="Kematjaya\SerialNumberBundle\Controller\SerialNumberController" public="true">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="kmj.serial_number_builder" />
+            <argument type="service" id="kmj.parameter_repo" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="Kematjaya\SerialNumberBundle\DataFixtures\SerialNumberFixtures" class="Kematjaya\SerialNumberBundle\DataFixtures\SerialNumberFixtures">
+            <argument type="service" id="kmj.serial_number_builder" />
+            <argument type="service" id="kmj.parameter_repo" />
+        </service>-->
+    </services>
+</container>
