@@ -1,4 +1,6 @@
 /vendor
 /nbproject
 /var
+/tests
 composer.lock
+phpunit.xml.dist
