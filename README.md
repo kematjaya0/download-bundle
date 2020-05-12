@@ -9,6 +9,7 @@
    `
    Kematjaya\DownloadBundle\DownloadBundle::class => ['all' => true]
    `
+   
 3. create file config/packages/kmj_download.yml
 
    `
@@ -17,12 +18,14 @@
     encrypt: 
         key: ~ # encrypt key
    `
+   
 4. import routing config/routes/annotations.yaml
 
   `
   kmj_download:
     resource: '@DownloadBundle/Resources/config/routing.xml'
   `
+  
 5. using template in twig config/packages/twig.yaml
 
   `
@@ -31,6 +34,7 @@
       '@Download/upload_theme.html.twig'
     ]
   `
+  
 6. implement to entity e.g. App\Entity\Person
 
   `
