@@ -23,7 +23,7 @@ class EncryptDecrypt
         
         if(!$this->keyString)
         {
-            throw \Exception("please set encrypt key");
+            throw new \Exception("please set encrypt key");
         }
     }
 

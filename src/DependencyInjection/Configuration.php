@@ -14,6 +14,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('kmj_download');
         $treeBuilder->getRootNode()
                 ->children()
+                    ->scalarNode('upload_dir')->end()
                     ->arrayNode('encrypt')
                         ->children()
                             ->scalarNode('key')->end()

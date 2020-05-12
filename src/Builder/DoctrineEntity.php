@@ -50,7 +50,7 @@ class DoctrineEntity implements ObjectBuilderInterface
         {
             throw new DownloadException("data not found");
         }
-        if(!$data instanceof FormFileInterface)
+        if(!$data instanceof DownloadInterface)
         {
             throw new DownloadException(sprintf("invalid data %s must instance of %s", $className, DownloadInterface::class));
         }

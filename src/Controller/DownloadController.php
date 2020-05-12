@@ -31,7 +31,7 @@ class DownloadController extends AbstractController
         
         if(!$this->uploadDir)
         {
-            throw \Exception("please set upload_dir");
+            throw new \Exception("please set upload_dir");
         }
         
         $data  = $this->doctrineEntity->getObject($type, $q);
