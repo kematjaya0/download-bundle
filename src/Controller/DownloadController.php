@@ -5,7 +5,6 @@ namespace Kematjaya\DownloadBundle\Controller;
 use Kematjaya\DownloadBundle\Builder\DoctrineEntity;
 use Kematjaya\DownloadBundle\Manager\DownloadManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
