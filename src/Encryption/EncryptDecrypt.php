@@ -5,7 +5,7 @@ namespace Kematjaya\DownloadBundle\Encryption;
 use Defuse\Crypto\Key;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
@@ -13,11 +13,27 @@ class EncryptDecrypt
 {
     private $keyString;
     
-    public function __construct(ParameterBagInterface $parameterBag) 
+    public function __construct(ContainerInterface $container) 
     {
-        $this->keyString = $parameterBag->get('encrypt_key');
+        $config = $container->getParameter('kmj_download');
+        if(isset($config['encrypt']['key']))
+        {
+            $this->keyString = $config['encrypt']['key'];
+        }
+        
+        if(!$this->keyString)
+        {
+            throw \Exception("please set encrypt key");
+        }
     }
 
+    public function setKeyString($keyString):self
+    {
+        $this->keyString = $keyString;
+        
+        return $this;
+    }
+    
     public function encryp($text)
     {
         $key = Key::loadFromAsciiSafeString($this->keyString);

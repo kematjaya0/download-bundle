@@ -15,8 +15,8 @@ class BundleTest extends WebTestCase
         $client = static::createClient();
         $container = $client->getContainer();
         
-        dump($container);exit;
-        //dump($container->has('kmj.serial_number_console'));exit;
+        $this->assertTrue($container->has('kmj.encrypt_decrypt'));
+        //dump($container->has('Doctrine\ORM\EntityManager'));exit;
     }
     
     public static function getKernelClass() 
