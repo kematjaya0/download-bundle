@@ -1,5 +1,6 @@
 # download-bundle for symfony 4 / symfony 5
-1. install 
+1. install
+
    `
    composer require kematjaya/download-bundle
    `
@@ -27,6 +28,7 @@
     ]
   `
 6. implement to entity e.g. App\Entity\Person
+
   `
   namespace App\Entity;
   
@@ -34,7 +36,6 @@
   
   /**
   * @ORM\Table(name="person")
-  * @ORM\Entity(repositoryClass="App\Repository\PersonRepository")
   */
   class Person implements DownloadInterface
   {
