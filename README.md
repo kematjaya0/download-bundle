@@ -4,11 +4,13 @@
    `
    composer require kematjaya/download-bundle
    `
-2. udpate config/bundles.php
+2. update config/bundles.php
+
    `
    Kematjaya\DownloadBundle\DownloadBundle::class => ['all' => true]
    `
 3. create file config/packages/kmj_download.yml
+
    `
    download:
     upload_dir: '%kernel.project_dir%/public/uploads'
@@ -16,11 +18,13 @@
         key: ~ # encrypt key
    `
 4. import routing config/routes/annotations.yaml
+
   `
   kmj_download:
     resource: '@DownloadBundle/Resources/config/routing.xml'
   `
 5. using template in twig config/packages/twig.yaml
+
   `
   twig:
     form_themes: [
