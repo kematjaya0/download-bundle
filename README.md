@@ -12,7 +12,7 @@
    download:
     upload_dir: '%kernel.project_dir%/public/uploads'
     encrypt: 
-        key: ~ # encrypt key example: def00000ba99e2fe8c765adc1f915c5a8b40e1b34fb4324bfff75767725e3e1fb26b939ac4b9771bc16f864ccf1894c9dc452e8b2712448be826be0b7da6f464f78e8964
+        key: ~ # encrypt key
    `
 4. import routing config/routes/annotations.yaml
   `
@@ -59,7 +59,8 @@
     public static function getPaths():array
     {
         return [
-            'getImages' => 'person'  // 'getImages' is function where contain file name, and 'person' is path where file uploaded inside 'upload_dir' (part 3)
+            'getImages' => 'person'  
+            // 'getImages' is function where contain file name, and 'person' is path where file uploaded inside 'upload_dir' (part 3)
         ];
     }
   }
