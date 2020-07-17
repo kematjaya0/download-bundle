@@ -8,6 +8,7 @@ use Kematjaya\DownloadBundle\Exception\DownloadException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
 
 /**
@@ -16,13 +17,20 @@ use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
 class DownloadManager 
 {
     
-    private $encryptDecrypt, $basePath;
+    private $encryptDecrypt, $basePath, $uploadsDir;
     
-    public function __construct(EncryptDecrypt $encryptDecrypt) 
+    public function __construct(EncryptDecrypt $encryptDecrypt, ContainerBagInterface $parameterBag) 
     {
         $this->encryptDecrypt = $encryptDecrypt;
+        $parameters = $parameterBag->get('kmj_download');
+        $this->uploadsDir = $parameters['upload_dir'];
     }
     
+    /**
+     * @deprecated 
+     * @param type $basePath
+     * @return \self
+     */
     public function setBasePath($basePath):self
     {
         $this->basePath = $basePath;
@@ -30,22 +38,33 @@ class DownloadManager
         return $this;
     }
     
-    public function getResponseFile(DownloadInterface $data, $name, $basePath = null):Response
+    public function getUploadPath():string
     {
-        if($basePath)
+        return $this->uploadsDir;
+    }
+    
+    public function deleteFile(string $filePath):bool
+    {
+        $fileName = $this->uploadsDir . DIRECTORY_SEPARATOR . $filePath;
+        if(file_exists($fileName))
         {
-            $this->setBasePath($basePath);
+            return unlink($fileName);
         }
         
+        return false;
+    }
+    
+    public function getResponseFile(DownloadInterface $data, $name, $basePath = null):Response
+    {
         $name = $this->encryptDecrypt->decryp($name);
         $keyToFunction = function ($string, $capitalizeFirstCharacter = true) {
-            $str = str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
-
-            if (!$capitalizeFirstCharacter) {
-                $str[0] = strtolower($str[0]);
+            $strings = explode('_', $string);
+            foreach($strings as $k => $v)
+            {
+                $strings[$k] = ucwords($v);
             }
 
-            return 'get'.$str;
+            return 'get'. implode('', $strings);
         };
         
         $function = $keyToFunction($name);
@@ -62,7 +81,7 @@ class DownloadManager
         }
         
         $path = $paths[$function];
-        $filePath = $this->basePath.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.$data->$function();
+        $filePath = $this->uploadsDir.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.$data->$function();
         if(!file_exists($filePath))
         {
             throw new DownloadException(sprintf("file %f not found.", $filePath));
@@ -72,7 +91,7 @@ class DownloadManager
         return $this->buildResponse($filePath, $data->$function());
     }
     
-    private function buildResponse($filePath, $fileName):Response
+    public function buildResponse($filePath, $fileName):Response
     {
         $response = new BinaryFileResponse($filePath);
         $mimeTypeGuesser = new FileinfoMimeTypeGuesser();

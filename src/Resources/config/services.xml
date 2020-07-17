@@ -26,6 +26,7 @@
         <service id="kmj.builder_doctrine_entity" alias="Kematjaya\DownloadBundle\Builder\DoctrineEntity" public="true"/>
         <service id="Kematjaya\DownloadBundle\Manager\DownloadManager" class="Kematjaya\DownloadBundle\Manager\DownloadManager" public="true">
             <argument type="service" id="kmj.encrypt_decrypt" />
+            <argument type="service" id="parameter_bag" />
         </service>
         <service id="kmj.manager_download_manager" alias="Kematjaya\DownloadBundle\Manager\DownloadManager" public="true"/>
         
