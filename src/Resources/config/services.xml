@@ -7,7 +7,18 @@
         <service id="Kematjaya\DownloadBundle\Encryption\EncryptDecrypt" class="Kematjaya\DownloadBundle\Encryption\EncryptDecrypt">
             <argument type="service" id="service_container" />
         </service>
-        <service id="kmj.encrypt_decrypt" alias="Kematjaya\DownloadBundle\Encryption\EncryptDecrypt" public="true"/>
+        <service id="kmj.encrypt_decrypt" alias="Kematjaya\DownloadBundle\Encryption\EncryptDecrypt" public="true"/> 
+        
+        <service id="Kematjaya\DownloadBundle\Service\FileUploaderService" class="Kematjaya\DownloadBundle\Service\FileUploaderService">
+            <argument type="service" id="parameter_bag" />
+        </service>
+        <service id="kmj.service_file_uploader" alias="Kematjaya\DownloadBundle\Service\FileUploaderService" public="true"/> 
+        
+        <service id="Kematjaya\DownloadBundle\EventSubscriber\Type\UploadEventSubscriber" class="Kematjaya\DownloadBundle\EventSubscriber\Type\UploadEventSubscriber">
+            <argument type="service" id="kmj.service_file_uploader" />
+        </service>
+        <service id="kmj.upload_event_subscriber" alias="Kematjaya\DownloadBundle\EventSubscriber\Type\UploadEventSubscriber" public="true"/> 
+        
         <service id="Kematjaya\DownloadBundle\Builder\DoctrineEntity" class="Kematjaya\DownloadBundle\Builder\DoctrineEntity">
             <argument type="service" id="kmj.encrypt_decrypt" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
