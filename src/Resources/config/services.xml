@@ -27,6 +27,11 @@
             <argument type="service" id="kmj.encrypt_decrypt" />
             <tag name="twig.extension"/>
         </service>
+        
+        <service id="Kematjaya\DownloadBundle\Twig\ClassExtension" class="Kematjaya\DownloadBundle\Twig\ClassExtension">
+            <tag name="twig.extension"/>
+        </service>
+        
         <service id="kematjaya.encrypt_decrypt_extension" alias="Kematjaya\DownloadBundle\Twig\EncryptionExtension" public="true"></service>
         
         <service id="Kematjaya\DownloadBundle\Controller\DownloadController" class="Kematjaya\DownloadBundle\Controller\DownloadController" public="true">
