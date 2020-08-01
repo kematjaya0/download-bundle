@@ -14,7 +14,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('kmj_download');
         $treeBuilder->getRootNode()
                 ->children()
-                    ->scalarNode('upload_dir')->end()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('upload_dir')
+                            ->defaultValue('%kernel.project_dir%'.DIRECTORY_SEPARATOR.'docs'.DIRECTORY_SEPARATOR.'uploads')
+                        ->end()
+                    ->end()
                     ->arrayNode('encrypt')
                         ->children()
                             ->scalarNode('key')->end()
