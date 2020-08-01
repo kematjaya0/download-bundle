@@ -24,6 +24,10 @@ class DownloadManager
         $this->encryptDecrypt = $encryptDecrypt;
         $parameters = $parameterBag->get('kmj_download');
         $this->uploadsDir = $parameters['upload_dir'];
+        if(!is_dir($this->uploadsDir))
+        {
+            mkdir($this->uploadsDir, 0777, true);
+        }
     }
     
     /**
@@ -95,9 +99,11 @@ class DownloadManager
     {
         $response = new BinaryFileResponse($filePath);
         $mimeTypeGuesser = new FileinfoMimeTypeGuesser();
-        if($mimeTypeGuesser->isGuesserSupported()){
+        if($mimeTypeGuesser->isGuesserSupported())
+        {
             $response->headers->set('Content-Type', $mimeTypeGuesser->guessMimeType($filePath));
-        }else{
+        }else
+        {
             $response->headers->set('Content-Type', 'text/plain');
         }
         
